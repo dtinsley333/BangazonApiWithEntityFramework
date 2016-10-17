@@ -99,8 +99,8 @@ namespace BangazonApi.Controllers
         public IActionResult Put(int id, [FromBody] Customer customer)
         {
           customer.CustomerId=id;
-          context.Entry(customer).State = EntityState.Modified;//updates all the fields not just the changed ones
-          context.Customer.Update();// modifies only the changed fields.
+          context.Entry(customer).State = EntityState.Modified;//updates all the fields not just the changed ones, put is supposed to change all so I will update with this
+        //  context.Customer.Update();// modifies only the changed fields.
           context.SaveChanges();
            return Ok(customer);
         }
