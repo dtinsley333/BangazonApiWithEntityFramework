@@ -65,10 +65,7 @@ namespace BangazonApi.Controllers
             {
                 return NotFound();
             }
-
-
         }
-
 
        public IActionResult Post([FromBody] Customer customer)
         {
@@ -97,16 +94,35 @@ namespace BangazonApi.Controllers
             return CreatedAtRoute("GetCustomer", new { id = customer.CustomerId }, customer);
         }
 
-        // PUT api/values/5
+         // PUT /customers/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public IActionResult Put(int id, [FromBody] Customer customer)
         {
+          customer.CustomerId=id;
+          context.Customer.Update(customer);
+          context.SaveChanges();
+           return Ok(customer);
         }
 
-        // DELETE api/values/5
+    // DELETE /customers/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            Customer customer = context.Customer.Single(m => m.CustomerId == id);
+            if (customer == null)
+            {
+                return NotFound();
+            }
+
+            context.Customer.Remove(customer);
+            context.SaveChanges();
+
+            return Ok(customer);
         }
     }
 }
