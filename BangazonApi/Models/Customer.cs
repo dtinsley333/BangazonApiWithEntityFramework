@@ -24,7 +24,6 @@ namespace BangazonApi.Models
       [Required]
       [StringLength(60)]
       public string FirstName{get;set;}
-
       
       [StringLength(60)]
       public string StreetAddress {get;set;}
