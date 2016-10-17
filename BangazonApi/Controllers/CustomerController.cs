@@ -100,9 +100,9 @@ namespace BangazonApi.Controllers
         {
           customer.CustomerId=id;
           context.Entry(customer).State = EntityState.Modified;//updates all the fields not just the changed ones, put is supposed to change all so I will update with this
-        //  context.Customer.Update();// modifies only the changed fields.
+        //context.Customer.Update();// modifies only the changed fields.
           context.SaveChanges();
-           return Ok(customer);
+          return Ok(customer);
         }
 
     // DELETE /customers/5
